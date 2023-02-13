@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "es2018",
-    "lib": ["dom", "dom.iterable", "esnext", "es2018", "ESNext.AsyncIterable"],
+    "lib": ["dom", "dom.iterable", "esnext.asynciterable", "es2018"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -20,7 +20,6 @@
     },
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
