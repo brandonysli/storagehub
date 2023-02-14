@@ -1,5 +1,5 @@
-import { builder } from '../schema'
-import { prisma } from '../prisma'
+import { builder } from '../../builder'
+import { prisma } from '../../prisma'
 
 builder.queryFields((t) => ({
     ManyUser: t.prismaField({

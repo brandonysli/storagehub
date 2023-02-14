@@ -1,9 +1,17 @@
 import { gql, ApolloServer } from "apollo-server-micro";
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { builder } from './schema'
+import { builder } from './builder'
 
-const schema = builder.toSchema()
+// Initialize queries and mutations
+builder.queryType({})
+
+// Custom operations on select tables
+import "./schema/user/user.model"
+import "./schema/user/user.resolver"
+
+// Build and export the schema
+export const schema = builder.toSchema({})
 
 const apolloServer = new ApolloServer({
   schema
