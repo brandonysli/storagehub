@@ -1,0 +1,16 @@
+{
+    "links":[
+        {
+            "label":"Home",
+            "href":"/home"
+        },
+        {
+            "label":"Dest1",
+            "href":"/dest1"
+        },
+        {
+            "label":"Dest2",
+            "href":"/dest2"
+        }
+    ]
+}
