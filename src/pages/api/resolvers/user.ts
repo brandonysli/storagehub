@@ -1,12 +1,16 @@
-import "type-graphql"
+import { builder } from '../schema'
+import { prisma } from '../prisma'
 
-@ObjectType()
-class Rate {
-  @Field(type => Int)
-  value: number;
+builder.queryFields((t) => ({
+    ManyUser: t.prismaField({
+        type: "User",
+        nullable: true,
+        args: {},
+        resolve: (query, root, args, ctx) =>{
 
-  @Field()
-  date: Date;
+            return prisma.user.findMany({})
 
-  user: User;
-}
+        }
+    })
+})
+)

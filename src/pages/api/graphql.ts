@@ -1,29 +1,12 @@
 import { gql, ApolloServer } from "apollo-server-micro";
 import { NextApiRequest, NextApiResponse } from 'next';
 
-const typeDefs = gql`
-  type User {
-    id: ID
-  }
+import { builder } from './schema'
 
-  type Query {
-    getUser: User
-  }
-`;
-
-const resolvers = {
-  Query: {
-    getUser: () => {
-      return {
-        id: "Foo",
-      };
-    },
-  },
-};
+const schema = builder.toSchema()
 
 const apolloServer = new ApolloServer({
-  typeDefs,
-  resolvers,
+  schema
 });
 
 const startServer = apolloServer.start();
@@ -38,10 +21,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   res.setHeader(
       "Access-Control-Allow-Headers",
       "Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Methods, Access-Control-Allow-Origin, Access-Control-Allow-Credentials, Access-Control-Allow-Headers"
-  );
-  res.setHeader(
-      "Access-Control-Allow-Methods",
-      "POST, GET, PUT, PATCH, DELETE, OPTIONS, HEAD"
   );
   if (req.method === "OPTIONS") {
       res.end();
