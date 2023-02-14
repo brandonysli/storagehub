@@ -2,11 +2,17 @@ import SchemaBuilder from '@pothos/core';
 import { Prisma } from '@prisma/client';
 import PrismaPlugin from '@pothos/plugin-prisma';
 import type PrismaTypes from '@pothos/plugin-prisma/generated';
+import {NextApiRequest, NextApiResponse} from 'next'
 
 import { prisma } from './prisma'
 
+interface IContext {
+  req: NextApiRequest;
+  res: NextApiResponse;
+}
+
 export const builder = new SchemaBuilder<{
-    Context: { user: { isAdmin: boolean } };
+    Context: IContext;
     PrismaTypes: PrismaTypes;
   }>({
     plugins: [PrismaPlugin],

@@ -8,7 +8,7 @@ builder.queryType({})
 
 // Custom operations on select tables
 import "./schema/user/user.model"
-import "./schema/user/user.resolver"
+import "./schema/user/user.query"
 
 // Build and export the schema
 export const schema = builder.toSchema({})

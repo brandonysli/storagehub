@@ -6,11 +6,13 @@ builder.queryFields((t) => ({
         type: "User",
         nullable: true,
         args: {},
-        resolve: (query, root, args, ctx) =>{
+        resolve: (query, root, args) =>
 
-            return prisma.user.findMany({})
+            prisma.user.findMany({
+                ...query
+            })
 
-        }
+        
     })
 })
 )
