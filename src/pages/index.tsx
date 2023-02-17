@@ -21,7 +21,7 @@ export default function Home() {
       <main className={styles.main}>
         
         <span> Test here or below... </span>
-        <Map/>
+        <Map lat={ 42.454323} lng={ -76.475266}/>
       </main>
     </>
   )

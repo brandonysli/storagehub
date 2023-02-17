@@ -12,12 +12,18 @@ const containerStyle = {
   height: '400px'
 };
 
-const center = {
-  lat: -3.745,
-  lng: -38.523
-};
 
-const Map = () => {
+
+type Props = {
+  lat:number;
+  lng:number;
+}
+
+const Map = (props:Props) => {
+  const center = {
+    lat: props.lat,
+    lng: props.lng
+  };
   return (
     <LoadScript
       googleMapsApiKey="AIzaSyDw605EseQ7XN-qSd0cSfbOh_7crYUS2Os"
