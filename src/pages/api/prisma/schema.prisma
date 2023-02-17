@@ -15,35 +15,42 @@ datasource db {
 }
 
 model User {
-  id            String       @id @default(uuid()) @db.Uuid
-  name          String
-  email         String
-  phone         String?
-  storages      Storage[]
-  storageHost   StorageHost? @relation(fields: [storageHostId], references: [id])
-  storageHostId String?      @db.Uuid
+  id       String    @id @default(uuid()) @db.Uuid
+  name     String
+  email    String
+  phone    String?
+  storages Storage[]
+  package  Package[]
 }
 
 model Storage {
-  id            String       @id @default(uuid()) @db.Uuid
-  image         String
-  latitude      String
-  longitude     String
-  price         Int
-  description   String
-  size          Int
-  startDate     DateTime
-  endDate       DateTime
-  accessType    String
-  storageHost   StorageHost? @relation(fields: [storageHostId], references: [id])
-  storageHostId String?      @db.Uuid
-  User          User?        @relation(fields: [userId], references: [id])
-  userId        String?      @db.Uuid
+  id          String    @id @default(uuid()) @db.Uuid
+  image       Image[]
+  imageId     String    @db.Uuid()
+  packages    Package[]
+  latitude    String
+  longitude   String
+  price       Int
+  description String
+  size        Int
+  startDate   DateTime
+  endDate     DateTime
+  accessType  String
+  user        User?     @relation(fields: [userId], references: [id])
+  userId      String?   @db.Uuid
 }
 
-model StorageHost {
-  id       String    @id @default(uuid()) @db.Uuid
-  storages Storage[]
-  clients  User[]
-  userId   String    @unique @db.Uuid
+model Image {
+  id        String  @id @default(uuid()) @db.Uuid()
+  imageUrl  String
+  storageId String
+  storage   Storage @relation(fields: [storageId], references: [id])
+}
+
+model Package {
+  id        String   @id @default(uuid()) @db.Uuid
+  storage   Storage? @relation(fields: [storageId], references: [id])
+  storageId String?  @db.Uuid
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String   @db.Uuid
 }
