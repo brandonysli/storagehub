@@ -22,8 +22,8 @@ model User {
   storageSession StorageSession[]
   packages       Package[]
   storages       StorageHost[]
-  createdAt      DateTime         @db.Timestamptz(6)
-  modifiedAt     DateTime         @db.Timestamptz(6)
+  createdAt      DateTime         @default(now()) @db.Timestamptz(6)
+  modifiedAt     DateTime?         @db.Timestamptz(6)
 }
 
 model StorageHost {

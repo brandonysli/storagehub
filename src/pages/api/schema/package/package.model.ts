@@ -22,7 +22,23 @@ builder.prismaObject('Package', {
   })
 })
 
-//TODO: image typedef
 builder.prismaObject('Image', {
-
+  fields: (t) => ({
+    id: t.exposeString('id'),
+    imageUrl: t.exposeString('imageUrl'),
+    storageId: t.exposeString('storageId'),
+    storageHost: t.relation('storageHost'),
+    createdAt: t.field({
+      type: 'String',
+      resolve: (Image) => Image.createdAt.toString()
+    }),
+    modifiedAt: t.field({
+      type: 'String',
+      resolve: (Image) => Image.modifiedAt.toString()
+    }),
+    deletedAt: t.field({
+      type: 'String',
+      resolve: (Image) => Image.deletedAt.toString()
+    })
+  })
 })

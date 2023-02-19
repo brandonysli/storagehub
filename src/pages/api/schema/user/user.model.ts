@@ -15,7 +15,8 @@ builder.prismaObject('User', {
 		}),
 		modifiedAt: t.field({
 			type: 'String',
-      resolve: (user) => user.modifiedAt.toString(),
+			nullable: true,
+      resolve: (user) => user.modifiedAt?.toString(),
   	})
 	})
 })
