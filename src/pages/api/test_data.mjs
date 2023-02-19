@@ -32,7 +32,7 @@ const ST1 = await prisma.dM_StorageTypes.create({
 
 
 
-const SL1 = prisma.storageListing.create({
+const SL1 = await prisma.storageListing.create({
   data: {
     latitude: 1,
     longitude: 2,
@@ -40,7 +40,6 @@ const SL1 = prisma.storageListing.create({
     description: "Description",
     size: 10,
     storageTypeId: ST1.id,
-    userId: U1.id,
-
+    ownerId: U1.id
   }
 })

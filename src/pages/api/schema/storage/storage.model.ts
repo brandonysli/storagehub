@@ -7,14 +7,13 @@ builder.prismaObject('StorageListing', {
     storageSessions: t.relation('storageSessions'),
     latitude: t.exposeFloat('latitude'),
     longitude: t.exposeFloat('longitude'),
-    address: t.exposeString('address'),
-   
+    address: t.exposeString('address'),   
     description: t.exposeString('description'),
     size: t.exposeInt('size'),
     storageType: t.relation('storageType'),
     storageTypeId: t.exposeString('storageTypeId'),
     owner: t.relation('owner'),
-    userId: t.exposeString('userId'),
+    ownerId: t.exposeString('ownerId'),
     createdAt: t.field({
       type: 'String',
       resolve: (StorageHost) => StorageHost.createdAt.toString()
