@@ -48,7 +48,7 @@ model StorageHost {
 model Image {
   id          String      @id @default(uuid()) @db.Uuid()
   imageUrl    String
-  storageId   String
+  storageId   String      @db.Uuid()
   storageHost StorageHost @relation(fields: [storageId], references: [id])
   createdAt   DateTime    @db.Timestamptz(6)
   modifiedAt  DateTime    @db.Timestamptz(6)
