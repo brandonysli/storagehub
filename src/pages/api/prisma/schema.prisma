@@ -21,12 +21,12 @@ model User {
   phone          String?
   storageSession StorageSession[]
   packages       Package[]
-  storages       StorageHost[]
+  storages       StorageListing[]
   createdAt      DateTime         @db.Timestamptz(6)
   modifiedAt     DateTime         @db.Timestamptz(6)
 }
 
-model StorageHost {
+model StorageListing {
   id              String           @id @default(uuid()) @db.Uuid
   image           Image[]
   storageSessions StorageSession[]
@@ -46,13 +46,13 @@ model StorageHost {
 }
 
 model Image {
-  id          String      @id @default(uuid()) @db.Uuid()
+  id          String         @id @default(uuid()) @db.Uuid()
   imageUrl    String
-  storageId   String      @db.Uuid()
-  storageHost StorageHost @relation(fields: [storageId], references: [id])
-  createdAt   DateTime    @db.Timestamptz(6)
-  modifiedAt  DateTime    @db.Timestamptz(6)
-  deletedAt   DateTime    @db.Timestamptz(6)
+  storageId   String         @db.Uuid()
+  storageHost StorageListing @relation(fields: [storageId], references: [id])
+  createdAt   DateTime       @db.Timestamptz(6)
+  modifiedAt  DateTime       @db.Timestamptz(6)
+  deletedAt   DateTime       @db.Timestamptz(6)
 }
 
 model Package {
@@ -67,24 +67,24 @@ model Package {
 }
 
 model StorageSession {
-  id            String      @id @default(uuid()) @db.Uuid
-  storageHost   StorageHost @relation(fields: [storageHostId], references: [id])
-  storageHostId String      @db.Uuid
-  user          User        @relation(fields: [userId], references: [id])
-  userId        String      @db.Uuid
+  id            String         @id @default(uuid()) @db.Uuid
+  storageHost   StorageListing @relation(fields: [storageHostId], references: [id])
+  storageHostId String         @db.Uuid
+  user          User           @relation(fields: [userId], references: [id])
+  userId        String         @db.Uuid
   packages      Package[]
-  startDate     DateTime    @db.Timestamptz(6)
-  endDate       DateTime    @db.Timestamptz(6)
-  createdAt     DateTime    @db.Timestamptz(6)
-  modifiedAt    DateTime    @db.Timestamptz(6)
-  deletedAt     DateTime    @db.Timestamptz(6)
+  startDate     DateTime       @db.Timestamptz(6)
+  endDate       DateTime       @db.Timestamptz(6)
+  createdAt     DateTime       @db.Timestamptz(6)
+  modifiedAt    DateTime       @db.Timestamptz(6)
+  deletedAt     DateTime       @db.Timestamptz(6)
 }
 
 model DM_StorageTypes {
-  id          String        @id @default(uuid()) @db.Uuid
+  id          String           @id @default(uuid()) @db.Uuid
   storageType String
-  createdAt   DateTime      @db.Timestamptz(6)
-  modifiedAt  DateTime      @db.Timestamptz(6)
-  deletedAt   DateTime      @db.Timestamptz(6)
-  storageHost StorageHost[]
+  createdAt   DateTime         @db.Timestamptz(6)
+  modifiedAt  DateTime         @db.Timestamptz(6)
+  deletedAt   DateTime         @db.Timestamptz(6)
+  storageHost StorageListing[]
 }
