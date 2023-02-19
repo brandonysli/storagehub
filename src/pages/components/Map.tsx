@@ -34,7 +34,14 @@ const Map = (coords:Coords) => {
         zoom={10}
       >
         { /* Child components, such as markers, info windows, etc. */ }
-        <></>
+        <>
+        <OverlayView
+          position = {center}
+          mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
+        >
+        <h1 className = "bg-sky-500 p-6 text-white">Marker</h1>
+        </OverlayView>
+        </>
       </GoogleMap>
     </LoadScript>
   )
