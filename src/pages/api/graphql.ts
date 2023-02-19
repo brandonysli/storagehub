@@ -5,10 +5,13 @@ import { builder } from './builder'
 
 // Initialize queries and mutations
 builder.queryType({})
+//builder.mutationType({})
 
 // Custom operations on select tables
 import "./schema/user/user.model"
 import "./schema/user/user.query"
+import "./schema/storage/storage.model"
+import "./schema/storage/storage.query"
 
 // Build and export the schema
 export const schema = builder.toSchema({})
