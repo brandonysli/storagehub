@@ -1,3 +1,4 @@
+import { idText } from 'typescript'
 import { builder } from '../../builder'
 import { prisma } from '../../prisma'
 
@@ -11,12 +12,22 @@ builder.queryFields((t) => ({
         ...query
       })
   })
-}))
 
-builder.queryFields((t) => ({
   OneUser: t.prismaField({
-    type: "User",
-
-  })
+    type: "User",
+    nullable: true,
+    args: {
+      id: t.arg({type: "String"})
+    },
+    resolve: (query, root, args) => 
+      prisma.user.findFirst({
+        ...query,
+        where: {
+          id: args.id || undefined,
+        }
+      })
+  })
 }))
+
+
 
