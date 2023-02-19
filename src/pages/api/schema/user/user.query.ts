@@ -1,4 +1,3 @@
-import { idText } from 'typescript'
 import { builder } from '../../builder'
 import { prisma } from '../../prisma'
 
@@ -32,8 +31,10 @@ builder.queryFields((t) => ({
       await prisma.user.findFirstOrThrow({
       ...query,
       where: {
-        id: args.id,
-
+        id: args.where?.id ?? undefined,
+        name: args.where?.name ?? undefined,
+        email: args.where?.email ?? undefined,
+        phone: args.where?.phone ?? undefined
       }
     })
   })

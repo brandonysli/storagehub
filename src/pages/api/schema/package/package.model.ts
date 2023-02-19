@@ -30,6 +30,8 @@ builder.prismaObject('Image', {
     imageUrl: t.exposeString('imageUrl'),
     storageId: t.exposeString('storageId'),
     storageListing: t.relation('storageListing'),
+    user: t.relation('user', { nullable: true }),
+    userId: t.exposeString('userId', { nullable: true }),
     createdAt: t.field({
       type: 'String',
       resolve: (Image) => Image.createdAt.toString()

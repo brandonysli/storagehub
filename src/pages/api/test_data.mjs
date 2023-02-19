@@ -30,8 +30,6 @@ const ST1 = await prisma.dM_StorageTypes.create({
   }
 })
 
-
-
 const SL1 = await prisma.storageListing.create({
   data: {
     latitude: 1,

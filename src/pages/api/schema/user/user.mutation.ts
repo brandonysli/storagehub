@@ -1,6 +1,20 @@
 import { builder } from "../../builder"
 import { prisma } from "../../prisma"
 
+const UpdateOneUserWhere = builder.inputType('UpdateOneUserWhere', {
+  fields: (t) => ({
+    id: t.string({required: true})
+  })
+})
+
+const UpdateOneUserData = builder.inputType('UpdateOneUserData', {
+  fields: (t) => ({
+    name: t.string(),
+    email: t.string(),
+    phone: t.string() 
+  })
+})
+
 builder.mutationFields((t) => ({
     CreateOneUser: t.prismaField({
         type: "User",
@@ -19,5 +33,26 @@ builder.mutationFields((t) => ({
                     phone: args.phone || undefined
                 }
             })
+    }),
+
+    UpdateOneUser: t.prismaField({
+      type: "User",
+      nullable: true,
+      args: {
+        where: t.arg({ type: UpdateOneUserWhere, required: true }),
+        data: t.arg({ type: UpdateOneUserData, required: true })
+      },
+      resolve: (mutation, parent, args) => 
+        prisma.user.update({
+          ...mutation,
+            where: {
+              id: args.where.id
+            },
+            data: {
+              name: args.data?.name ?? undefined,
+              email: args.data?.email ?? undefined,
+              phone: args.data?.phone ?? undefined
+            }
+        })
     })
 }))
