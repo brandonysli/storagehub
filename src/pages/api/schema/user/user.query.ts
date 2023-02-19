@@ -29,13 +29,13 @@ builder.queryFields((t) => ({
     },
     resolve: async (query, root, args) => 
       await prisma.user.findFirstOrThrow({
-      ...query,
-      where: {
-        id: args.where?.id ?? undefined,
-        name: args.where?.name ?? undefined,
-        email: args.where?.email ?? undefined,
-        phone: args.where?.phone ?? undefined
-      }
+        ...query,
+        where: {
+          id: args.where?.id ?? undefined,
+          name: args.where?.name ?? undefined,
+          email: args.where?.email ?? undefined,
+          phone: args.where?.phone ?? undefined
+        }
     })
   })
 }))
