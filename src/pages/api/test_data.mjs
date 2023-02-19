@@ -1,12 +1,12 @@
 import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient()
-prisma.user.deleteMany()
-prisma.storageListing.deleteMany()
-prisma.storageSession.deleteMany()
-prisma.image.deleteMany()
-prisma.package.deleteMany()
-prisma.dM_StorageTypes.deleteMany()
+await prisma.user.deleteMany()
+await prisma.storageListing.deleteMany()
+await prisma.storageSession.deleteMany()
+await prisma.image.deleteMany()
+await prisma.package.deleteMany()
+await prisma.dM_StorageTypes.deleteMany()
 
 const U1 = await prisma.user.create({
   data: {
