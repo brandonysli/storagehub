@@ -4,6 +4,7 @@ import { Inter } from '@next/font/google'
 import styles from '@/styles/Home.module.css'
 import NavBar from './components/NavBar'
 import Map from './components/Map'
+import TextInput from './components/TextInput'
 import React from 'react'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -21,6 +22,7 @@ export default function Home() {
       <main className={styles.main}>
         
         <span> Test here or below... </span>
+        <TextInput/>
         <Map lat={ 42.454323} lng={ -76.475266}/>
       </main>
     </>

@@ -14,15 +14,15 @@ const containerStyle = {
 
 
 
-type Props = {
+type Coords = {
   lat:number;
   lng:number;
 }
 
-const Map = (props:Props) => {
+const Map = (coords:Coords) => {
   const center = {
-    lat: props.lat,
-    lng: props.lng
+    lat: coords.lat,
+    lng: coords.lng
   };
   return (
     <LoadScript
