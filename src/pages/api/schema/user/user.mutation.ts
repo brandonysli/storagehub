@@ -19,6 +19,5 @@ builder.mutationFields((t) => ({
                     phone: args.phone || undefined
                 }
             })
-        
     })
 }))

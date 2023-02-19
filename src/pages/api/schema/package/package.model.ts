@@ -13,11 +13,13 @@ builder.prismaObject('Package', {
     }),
     modifiedAt: t.field({
       type: 'String',
-      resolve: (Package) => Package.modifiedAt.toString()
+      nullable: true,
+      resolve: (Package) => Package.modifiedAt?.toString()
     }),
     deletedAt: t.field({
       type: 'String',
-      resolve: (Package) => Package.deletedAt.toString()
+      nullable: true,
+      resolve: (Package) => Package.deletedAt?.toString()
     })
   })
 })
@@ -27,18 +29,20 @@ builder.prismaObject('Image', {
     id: t.exposeString('id'),
     imageUrl: t.exposeString('imageUrl'),
     storageId: t.exposeString('storageId'),
-    storageHost: t.relation('storageHost'),
+    storageListing: t.relation('storageListing'),
     createdAt: t.field({
       type: 'String',
       resolve: (Image) => Image.createdAt.toString()
     }),
     modifiedAt: t.field({
       type: 'String',
-      resolve: (Image) => Image.modifiedAt.toString()
+      nullable: true,
+      resolve: (Image) => Image.modifiedAt?.toString()
     }),
     deletedAt: t.field({
       type: 'String',
-      resolve: (Image) => Image.deletedAt.toString()
+      nullable: true,
+      resolve: (Image) => Image.deletedAt?.toString()
     })
   })
 })

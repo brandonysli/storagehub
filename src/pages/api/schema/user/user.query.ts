@@ -2,31 +2,41 @@ import { idText } from 'typescript'
 import { builder } from '../../builder'
 import { prisma } from '../../prisma'
 
+const OneUserWhere = builder.inputType('OneUserInputType', {
+  fields: (t) => ({
+    id: t.string({ description: 'The id of the user' }),
+    name: t.string({ description: 'The name of the user' }),
+    email: t.string({ description: 'The email of the user' }),
+    phone: t.string({ description: 'The phone number of the user' })
+  })
+})
+
 builder.queryFields((t) => ({
   ManyUser: t.prismaField({
     type: ["User"],
     nullable: true,
     args: {},
-    resolve: (query, root, args) => 
-      prisma.user.findMany({
+    resolve: async (query, root, args) => 
+      await prisma.user.findMany({
         ...query
       })
-  })
+  }),
 
   OneUser: t.prismaField({
-    type: "User",
-    nullable: true,
-    args: {
-      id: t.arg({type: "String"})
-    },
-    resolve: (query, root, args) => 
-      prisma.user.findFirst({
-        ...query,
-        where: {
-          id: args.id || undefined,
-        }
-      })
-  })
+    type: "User",
+    nullable: true,
+    args: {
+      where: t.arg({type: OneUserWhere})
+    },
+    resolve: async (query, root, args) => 
+      await prisma.user.findFirstOrThrow({
+      ...query,
+      where: {
+        id: args.id,
+
+      }
+    })
+  })
 }))
 
 
