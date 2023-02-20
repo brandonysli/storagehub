@@ -2,8 +2,9 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from '@next/font/google'
 import styles from '@/styles/Home.module.css'
+import {HexColor} from "./modules/HexColor"
+import NaiveTag from "./components/modular/NaiveTag"
 
-const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
   return (
@@ -16,7 +17,10 @@ export default function Home() {
       </Head>
       <main className={styles.main}>
         <span> Test here or below... </span>
+
+        <NaiveTag backgroundColor={new HexColor("#d97706")} textColor={new HexColor("#22c55e")} tagname = "BEST TAG NAME" tagSize='sm' />
       </main>
     </>
   )
 }
+
