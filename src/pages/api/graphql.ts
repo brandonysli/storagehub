@@ -5,11 +5,13 @@ import { builder } from './builder'
 
 // Initialize queries and mutations
 builder.queryType({})
-//builder.mutationType({})
+builder.mutationType({})
 
 // Custom operations on select tables
+import "./schema/package/package.model"
 import "./schema/user/user.model"
 import "./schema/user/user.query"
+import "./schema/user/user.mutation"
 import "./schema/storage/storage.model"
 import "./schema/storage/storage.query"
 

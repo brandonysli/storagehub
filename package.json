@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "db:generate": "npx prisma generate --schema=./src/pages/api/prisma/schema.prisma",
-    "db:push": "npx prisma db push --schema=./src/pages/api/prisma/schema.prisma"
+    "db:push": "npx prisma db push --schema=./src/pages/api/prisma/schema.prisma",
+    "data": "node src/pages/api/test_data.mjs"
   },
   "dependencies": {
     "@next/font": "13.1.6",

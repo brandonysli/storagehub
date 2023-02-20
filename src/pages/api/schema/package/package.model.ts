@@ -13,16 +13,38 @@ builder.prismaObject('Package', {
     }),
     modifiedAt: t.field({
       type: 'String',
-      resolve: (Package) => Package.modifiedAt.toString()
+      nullable: true,
+      resolve: (Package) => Package.modifiedAt?.toString()
     }),
     deletedAt: t.field({
       type: 'String',
-      resolve: (Package) => Package.deletedAt.toString()
+      nullable: true,
+      resolve: (Package) => Package.deletedAt?.toString()
     })
   })
 })
 
-//TODO: image typedef
 builder.prismaObject('Image', {
-
+  fields: (t) => ({
+    id: t.exposeString('id'),
+    imageUrl: t.exposeString('imageUrl'),
+    storageId: t.exposeString('storageId'),
+    storageListing: t.relation('storageListing'),
+    user: t.relation('user', { nullable: true }),
+    userId: t.exposeString('userId', { nullable: true }),
+    createdAt: t.field({
+      type: 'String',
+      resolve: (Image) => Image.createdAt.toString()
+    }),
+    modifiedAt: t.field({
+      type: 'String',
+      nullable: true,
+      resolve: (Image) => Image.modifiedAt?.toString()
+    }),
+    deletedAt: t.field({
+      type: 'String',
+      nullable: true,
+      resolve: (Image) => Image.deletedAt?.toString()
+    })
+  })
 })
