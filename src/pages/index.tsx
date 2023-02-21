@@ -1,14 +1,13 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from '@next/font/google'
-import styles from '@/styles/Home.module.css'
-import {HexColor} from "./modules/HexColor"
-import NaiveTag from "./components/modular/NaiveTag"
-import NavBar from './components/NavBar'
-import Map from './components/Map'
-import TextInput from './components/TextInput'
-import React from 'react'
-
+import Head from "next/head";
+import Image from "next/image";
+import { Inter } from "@next/font/google";
+import styles from "@/styles/Home.module.css";
+import { HexColor } from "./modules/HexColor";
+import NaiveTag from "./components/modular/NaiveTag";
+import NavBar from "./components/NavBar";
+import Map from "./components/Map";
+import TextInput from "./components/modular/TextInput";
+import React from "react";
 
 export default function Home() {
   return (
@@ -21,14 +20,17 @@ export default function Home() {
       </Head>
       <NavBar />
       <main className={styles.main}>
-        
         <span> Test here or below... </span>
 
-        <NaiveTag backgroundColor={new HexColor("#d97706")} textColor={new HexColor("#22c55e")} tagname = "BEST TAG NAME" tagSize='sm' />
-        <TextInput/>
-        <Map lat={ 42.454323} lng={ -76.475266}/>
+        <NaiveTag
+          backgroundColor={new HexColor("#d97706")}
+          textColor={new HexColor("#22c55e")}
+          tagname="BEST TAG NAME"
+          tagSize="sm"
+        />
+        <TextInput />
+        <Map lat={42.454323} lng={-76.475266} />
       </main>
     </>
-  )
+  );
 }
-

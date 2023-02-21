@@ -1,22 +1,24 @@
 // Declare ButtonPropTypes
+import { HexColor } from "../../modules/HexColor";
+
 type ButtonPropType = {
-    radius: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'full';
-    color: 'red' | 'orange' | 'yellow' | 'blue';
-    onClick?: React.MouseEventHandler<HTMLButtonElement>;
-    children?: React.ReactNode;
-  };
+  textColor: HexColor;
+  backgroundColor: HexColor;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  children?: React.ReactNode;
+};
 
-export default function Button(ButtonProps: ButtonPropType) {
-
-  // flexibility in client button (cornerRadius, buttonColor)
-  let cornerRadius = `rounded-${ButtonProps.radius}`
-  let buttonColor = `bg-${ButtonProps.color}-200`
-
+export default function NaiveButton(NaiveButtonProps: ButtonPropType) {
   return (
-    <button 
-      className={`flex flex-row gap-2 w-min px-2 py-1 ${cornerRadius} ${buttonColor}`} 
-      onClick={ButtonProps.onClick}>
-          {ButtonProps.children}
+    <button
+      className={`flex flex-row gap-2 px-4 py-2 rounded-lg text-base font-semibold justify-center items-center`}
+      style={{
+        backgroundColor: NaiveButtonProps.backgroundColor.color,
+        color: NaiveButtonProps.textColor.color,
+      }}
+      onClick={NaiveButtonProps.onClick}
+    >
+      {NaiveButtonProps.children}
     </button>
-  )
+  );
 }
