@@ -3,7 +3,6 @@ import { Prisma } from '@prisma/client';
 import PrismaPlugin from '@pothos/plugin-prisma';
 import type PrismaTypes from '@pothos/plugin-prisma/generated';
 import {NextApiRequest, NextApiResponse} from 'next'
-
 import { prisma } from './prisma'
 
 interface IContext {
