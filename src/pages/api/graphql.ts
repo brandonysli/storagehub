@@ -1,25 +1,29 @@
 import { gql, ApolloServer } from "apollo-server-micro";
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { builder } from './builder'
+const typeDefs = gql`
+  type User {
+    id: ID
+  }
 
-// Initialize queries and mutations
-builder.queryType({})
-builder.mutationType({})
+  type Query {
+    getUser: User
+  }
+`;
 
-// Custom operations on select tables
-import "./schema/package/package.model"
-import "./schema/user/user.model"
-import "./schema/user/user.query"
-import "./schema/user/user.mutation"
-import "./schema/storage/storage.model"
-import "./schema/storage/storage.query"
-
-// Build and export the schema
-export const schema = builder.toSchema({})
+const resolvers = {
+  Query: {
+    getUser: () => {
+      return {
+        id: "Foo",
+      };
+    },
+  },
+};
 
 const apolloServer = new ApolloServer({
-  schema
+  typeDefs,
+  resolvers,
 });
 
 const startServer = apolloServer.start();
@@ -34,6 +38,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   res.setHeader(
       "Access-Control-Allow-Headers",
       "Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Methods, Access-Control-Allow-Origin, Access-Control-Allow-Credentials, Access-Control-Allow-Headers"
+  );
+  res.setHeader(
+      "Access-Control-Allow-Methods",
+      "POST, GET, PUT, PATCH, DELETE, OPTIONS, HEAD"
   );
   if (req.method === "OPTIONS") {
       res.end();
