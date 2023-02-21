@@ -5,7 +5,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-const NavBar: React.FC<{}> = () => {
+const NavBar = () => {
   return (
     <nav className="bg-sky-500 flex items-center flex-wrap p-6">
       <div className="flex items-center flex-shrink-0 mr-6">
