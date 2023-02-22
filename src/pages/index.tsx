@@ -42,6 +42,7 @@ export default function Home() {
           onError={() => {
             console.log('Login Failed');
           }}
+          ux_mode='redirect'
         />;
       </div>
       </main>
