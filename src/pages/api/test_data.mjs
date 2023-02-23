@@ -1,8 +1,8 @@
 import { PrismaClient } from '@prisma/client';
-import { prisma } from './prisma'
+const prisma = new PrismaClient()
 
-await prisma.user.deleteMany()
 await prisma.storageListing.deleteMany()
+await prisma.user.deleteMany()
 await prisma.storageSession.deleteMany()
 await prisma.image.deleteMany()
 await prisma.package.deleteMany()
