@@ -6,8 +6,8 @@ import { HexColor } from "./modules/HexColor";
 import NaiveTag from "./components/modular/NaiveTag";
 import NavBar from "./components/NavBar";
 import Map from "./components/Map";
-import TextInput from "./components/modular/TextInput";
 import React from "react";
+import NaiveInput from "./components/modular/NaiveInput";
 
 export default function Home() {
   return (
@@ -28,7 +28,7 @@ export default function Home() {
           tagname="BEST TAG NAME"
           tagSize="sm"
         />
-        <TextInput />
+        <NaiveInput heading={""} inputType={"text"} />
         <Map lat={42.454323} lng={-76.475266} />
       </main>
     </>

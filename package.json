@@ -31,6 +31,7 @@
     "eslint-config-next": "13.1.6",
     "google-map-react": "^2.2.0",
     "graphql": "^16.6.0",
+    "micro": "^10.0.1",
     "next": "13.1.6",
     "postcss": "^8.4.21",
     "prisma": "^4.10.1",

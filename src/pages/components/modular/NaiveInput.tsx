@@ -1,7 +1,31 @@
 //use Throttling and Debouncing
-import React, { useState } from "react";
-import useDebounce from "../../hooks/useDebounce";
-const TextInput = () => {
+//highlight around input box when selected.
+
+import React, { useEffect, useState } from "react";
+
+type inputInfo = {
+  heading:string;
+  inputType:"text"|"date"|"dropdown";
+}
+
+function useDebounce<T>(value:T,delay?:number){
+    
+  const[debouncedValue,setDebouncedValue] = useState<T>(value);
+
+  useEffect(()=>{
+      const timer = setTimeout( () => {
+          setDebouncedValue(value);
+      }, delay || 500);
+
+      return () => {
+          clearTimeout(timer);
+      }
+  },[value,delay]);
+
+  return debouncedValue;
+}
+
+export default function NaiveInput(info:inputInfo) {
   const [textInput, setTextInput] = useState("");
   const debouncedValue = useDebounce(textInput, 200);
   return (
@@ -19,5 +43,3 @@ const TextInput = () => {
     </>
   );
 };
-
-export default TextInput;
