@@ -112,3 +112,20 @@ export const ManyUser = gql`
     }
   }
 `;
+
+export const UserAuth = gql`
+  query UserAuth {
+    UserAuth {
+      phone
+      name
+      imageId
+      id
+      email
+      avatar {
+        id
+        imageUrl
+        userId
+      }
+    }
+  }
+`;

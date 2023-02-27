@@ -1,45 +1,53 @@
 import { gql, ApolloServer } from "apollo-server-micro";
-import { NextApiRequest, NextApiResponse } from 'next';
+import { NextApiRequest, NextApiResponse } from "next";
 
-import { builder } from './builder'
+import { builder } from "./builder";
 
 // Initialize queries and mutations
-builder.queryType({})
-builder.mutationType({})
+builder.queryType({});
+builder.mutationType({});
 
 // Custom operations on select tables
-import "./schema/package/package.model"
-import "./schema/user/user.model"
-import "./schema/user/user.query"
-import "./schema/user/user.mutation"
-import "./schema/storage/storage.model"
-import "./schema/storage/storage.query"
+import "./schema/oauth/google.query";
+import "./schema/package/package.model";
+import "./schema/user/user.model";
+import "./schema/user/user.query";
+import "./schema/user/user.mutation";
+import "./schema/storage/storage.model";
+import "./schema/storage/storage.query";
 
 // Build and export the schema
-export const schema = builder.toSchema({})
+export const schema = builder.toSchema({});
 
 const apolloServer = new ApolloServer({
-  schema
+  schema,
 });
 
 const startServer = apolloServer.start();
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   res.setHeader("Access-Control-Allow-Credentials", "true");
   res.setHeader(
-      "Access-Control-Allow-Origin",
-      "https://studio.apollographql.com"
+    "Access-Control-Allow-Origin",
+    "https://studio.apollographql.com"
   );
   res.setHeader(
-      "Access-Control-Allow-Headers",
-      "Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Methods, Access-Control-Allow-Origin, Access-Control-Allow-Credentials, Access-Control-Allow-Headers"
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Methods, Access-Control-Allow-Origin, Access-Control-Allow-Credentials, Access-Control-Allow-Headers"
   );
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "POST, GET, PUT, PATCH, DELETE, OPTIONS"
+  );
+
   if (req.method === "OPTIONS") {
-      res.end();
-      return false;
+    res.end();
+    return false;
   }
-  
+
   await startServer;
   await apolloServer.createHandler({
     path: "/api/graphql",
@@ -48,6 +56,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
 export const config = {
   api: {
-    bodyParser: false,
+    bodyParser: true,
   },
 };
