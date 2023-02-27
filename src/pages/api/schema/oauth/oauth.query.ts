@@ -22,32 +22,30 @@ const UserInfo = builder.objectRef<IUserInfo>("UserInfo").implement({
   }),
 });
 
-builder.mutationFields((t) => ({
-  UserAuth: t.prismaField({
-    type: "User",
+builder.queryFields((t) => ({
+  UserAuth: t.field({
+    type: UserInfo,
     nullable: true,
-    resolve: async (query, root, args, context) => {
+    args: {
+      code: t.arg.string({ required: true }),
+      scope: t.arg.string({ required: true }),
+      authuser: t.arg.string({ required: true }),
+      consent: t.arg.string({ required: true }),
+    },
+    resolve: async (query, args, context, info) => {
       try {
         const { tokens } = await auth.getToken(context.req.body.code);
         console.log(context.req.body.code, tokens);
         auth.setCredentials(tokens);
         const userInfo = await google.oauth2("v2").userinfo.get({ auth });
 
-        const user = await prisma.user.create({
-          data: {
-            name: userInfo.data.name as string,
-            email: userInfo.data.email as string,
-          },
-        });
-
-        const avatar = await prisma.image.create({
-          data: {
-            imageUrl: userInfo.data.picture as string,
-            userId: user?.id,
-          },
-        });
         context.res.redirect(200, "/"); // send status 200 back to root
-        return user;
+        console.log(userInfo.data)
+        return {
+          name: userInfo.data.name as string,
+          email: userInfo.data.email as string,
+          picture: userInfo.data.picture as string
+        }
       } catch (e: any) {
         console.log(e);
         return null;

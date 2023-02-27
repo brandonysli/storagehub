@@ -8,6 +8,10 @@ import Map from "./components/Map";
 import TextInput from "./components/modular/TextInput";
 import React from "react";
 
+
+
+import LoginButton from "./components/LoginButton"; 
+
 import { useManyUserQuery } from "../gql/graphql";
 
 export default function Home() {
@@ -34,6 +38,8 @@ export default function Home() {
         />
         <TextInput />
         <Map lat={42.454323} lng={-76.475266} />
+
+        <LoginButton />
       </main>
     </>
   );

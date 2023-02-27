@@ -2,6 +2,7 @@ import '@/styles/globals.css'
 import type { AppProps } from 'next/app'
 import React from 'react'
 import NavBar from './components/NavBar'
+import {GoogleOAuthProvider } from '@react-oauth/google';
 
 import {
   ApolloClient,
@@ -22,10 +23,12 @@ export const client = new ApolloClient({
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
+    <GoogleOAuthProvider clientId={`${process.env.GOOGLE_CLIENT_ID}`}>
     <ApolloProvider client={client}>
       <NavBar /> 
       <Component {...pageProps} />
     </ApolloProvider>
+    </GoogleOAuthProvider>
   </>
   )
 }
