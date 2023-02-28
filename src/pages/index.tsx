@@ -13,11 +13,11 @@ import { useManyUserQuery } from "../gql/graphql";
 
 //import GoogleLogin from "./components/GoogleLogin";
 import GoogleOAuthLogin from "./components/GoogleOAuthLogin";
+import GoogleLogin from "./components/GoogleLogin";
 
 export default function Home() {
   const [credential, setCredential] = React.useState({});
 
-  console.log(credential);
   return (
     <>
       <Head>

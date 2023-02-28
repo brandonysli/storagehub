@@ -28,11 +28,14 @@ builder.queryFields((t) => ({
     nullable: true,
     resolve: async (query, root, args, context) => {
       try {
+        console.log("auth", auth);
         const { tokens } = await auth.getToken(context.req.body.code);
+        console.log("tokens", tokens);
+
         console.log(context.req.body.code, tokens);
         auth.setCredentials(tokens);
         const userInfo = await google.oauth2("v2").userinfo.get({ auth });
-
+        console.log("userInfo", userInfo);
         const user = await prisma.user.create({
           data: {
             name: userInfo.data.name as string,
@@ -46,8 +49,8 @@ builder.queryFields((t) => ({
             userId: user?.id,
           },
         });
-
-        return user;
+        context.res.redirect(200, "/"); // send status 200 back to root
+        return [user];
       } catch (e: any) {
         console.log(e);
         return null;

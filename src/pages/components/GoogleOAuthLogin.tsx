@@ -1,7 +1,8 @@
-import { useUserAuthQuery } from "@/gql/graphql";
+import { useUserAuthQuery } from "../../gql/graphql";
 import { useRouter, NextRouter } from "next/router";
+import React from "react";
 
-const Login = (router: NextRouter, rootUrl: string, qs: string) => {
+const Login = async (router: NextRouter, rootUrl: string, qs: string) => {
   router.push(`${rootUrl}?${qs}`);
 };
 
@@ -23,8 +24,10 @@ export default function getGoogleOAuthUrl() {
 
   const qs = new URLSearchParams(options);
 
-  console.log(process.env.GOOGLE_REDIRECT_URI);
-  console.log(qs.toString());
+  //console.log(process.env.GOOGLE_REDIRECT_URI);
+  //console.log(qs.toString());
+
+  const { loading, error, data } = useUserAuthQuery();
 
   return (
     <>
