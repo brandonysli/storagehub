@@ -115,18 +115,10 @@ const ManyUser = gql`
 
 const UserAuth = gql`
   query UserAuth(
-    $authuser: String!
     $code: String!
-    $hd: String
-    $prompt: String!
-    $scope: String!
   ) {
     UserAuth(
-      authuser: $authuser
       code: $code
-      hd: $hd
-      prompt: $prompt
-      scope: $scope
     ) {
       name
       email

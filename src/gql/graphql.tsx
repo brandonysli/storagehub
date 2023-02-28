@@ -119,11 +119,7 @@ export type QueryOneUserArgs = {
 
 
 export type QueryUserAuthArgs = {
-  authuser: Scalars['String'];
   code: Scalars['String'];
-  hd?: InputMaybe<Scalars['String']>;
-  prompt: Scalars['String'];
-  scope: Scalars['String'];
 };
 
 export type StorageListing = {
@@ -198,11 +194,7 @@ export type ManyUserQueryVariables = Exact<{ [key: string]: never; }>;
 export type ManyUserQuery = { __typename?: 'Query', ManyUser?: Array<{ __typename?: 'User', createdAt: string, email: string, id: string, imageId?: string | null, modifiedAt?: string | null, name: string, phone?: string | null, avatar?: { __typename?: 'Image', createdAt: string, deletedAt?: string | null, id: string, imageUrl: string, modifiedAt?: string | null, storageId: string, userId?: string | null, storageListing: { __typename?: 'StorageListing', address: string, createdAt: string, deletedAt?: string | null, description: string, id: string, latitude: number, longitude: number, modifiedAt?: string | null, ownerId: string, size: number, storageTypeId: string }, user?: { __typename?: 'User', createdAt: string, email: string, id: string, imageId?: string | null, modifiedAt?: string | null, name: string, phone?: string | null } | null } | null, packages: Array<{ __typename?: 'Package', createdAt: string, deletedAt?: string | null, id: string, modifiedAt?: string | null, storageSessionId: string, userId: string }>, storageSession: Array<{ __typename?: 'StorageSession', createdAt: string, deletedAt?: string | null, endDate: string, id: string, modifiedAt?: string | null, priceCents: number, startDate: string, storageListingId: string, user: string }>, storages: Array<{ __typename?: 'StorageListing', address: string, createdAt: string, deletedAt?: string | null, description: string, id: string, latitude: number, longitude: number, modifiedAt?: string | null, ownerId: string, size: number, storageTypeId: string, image: Array<{ __typename?: 'Image', createdAt: string, deletedAt?: string | null, id: string, imageUrl: string, modifiedAt?: string | null, storageId: string, userId?: string | null }>, owner: { __typename?: 'User', createdAt: string, email: string, id: string, imageId?: string | null, modifiedAt?: string | null, name: string, phone?: string | null }, storageSessions: Array<{ __typename?: 'StorageSession', createdAt: string, deletedAt?: string | null, endDate: string, id: string, modifiedAt?: string | null, priceCents: number, startDate: string, storageListingId: string, user: string }>, storageType: { __typename?: 'DM_StorageTypes', createdAt: string, deletedAt?: string | null, id: string, modifiedAt?: string | null, storageType: string } }> }> | null };
 
 export type UserAuthQueryVariables = Exact<{
-  authuser: Scalars['String'];
   code: Scalars['String'];
-  hd?: InputMaybe<Scalars['String']>;
-  prompt: Scalars['String'];
-  scope: Scalars['String'];
 }>;
 
 
@@ -355,14 +347,8 @@ export type ManyUserQueryHookResult = ReturnType<typeof useManyUserQuery>;
 export type ManyUserLazyQueryHookResult = ReturnType<typeof useManyUserLazyQuery>;
 export type ManyUserQueryResult = Apollo.QueryResult<ManyUserQuery, ManyUserQueryVariables>;
 export const UserAuthDocument = gql`
-    query UserAuth($authuser: String!, $code: String!, $hd: String, $prompt: String!, $scope: String!) {
-  UserAuth(
-    authuser: $authuser
-    code: $code
-    hd: $hd
-    prompt: $prompt
-    scope: $scope
-  ) {
+    query UserAuth($code: String!) {
+  UserAuth(code: $code) {
     name
     email
     picture
@@ -388,11 +374,7 @@ export type UserAuthComponentProps = Omit<ApolloReactComponents.QueryComponentOp
  * @example
  * const { data, loading, error } = useUserAuthQuery({
  *   variables: {
- *      authuser: // value for 'authuser'
  *      code: // value for 'code'
- *      hd: // value for 'hd'
- *      prompt: // value for 'prompt'
- *      scope: // value for 'scope'
  *   },
  * });
  */
