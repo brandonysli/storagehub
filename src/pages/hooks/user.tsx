@@ -113,18 +113,4 @@ const ManyUser = gql`
   }
 `;
 
-const UserAuth = gql`
-  query UserAuth(
-    $code: String!
-  ) {
-    UserAuth(
-      code: $code
-    ) {
-      name
-      email
-      picture
-    }
-  }
-`;
-
-export { ManyUser, UserAuth };
+export { ManyUser };

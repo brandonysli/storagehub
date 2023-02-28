@@ -67,8 +67,6 @@ builder.queryFields((t) => ({
         }
       );
 
-
-      //TODO: FIX HERE
       console.log(tokenResponse.data);
 
       const userUrl = "https://www.googleapis.com/oauth2/v2/userinfo";
@@ -86,9 +84,9 @@ builder.queryFields((t) => ({
     
 
       return {
-        name: "dwa dwa",
-        email: "userInfo.data.email as string",
-        picture: "userInfo.data.picture as string",
+        name: "test",
+        email: "test",
+        picture: "test",
       };
     },
   }),

@@ -1,6 +1,6 @@
-import { UserAuthDocument } from "./../../gql/graphql";
 import { NextApiRequest, NextApiResponse } from "next";
 import client from "../../lib/apollo/client";
+import { gql } from "@apollo/client";
 
 export default async function handler(
   req: NextApiRequest,
@@ -17,7 +17,19 @@ export default async function handler(
     
 
     const { data } = await client.query({
-      query: UserAuthDocument,
+      query: gql`
+      query UserAuth(
+        $code: String!
+      ) {
+        UserAuth(
+          code: $code
+        ) {
+          name
+          email
+          picture
+        }
+      }
+    `,
       variables: {
         code: params.code,
         hd: params.hd,
