@@ -50,7 +50,6 @@ export type Mutation = {
   __typename?: 'Mutation';
   CreateOneUser?: Maybe<User>;
   UpdateOneUser?: Maybe<User>;
-  UserAuth?: Maybe<User>;
 };
 
 
@@ -100,6 +99,7 @@ export type Query = {
   ManyUser?: Maybe<Array<User>>;
   OneStorageListing?: Maybe<StorageListing>;
   OneUser?: Maybe<User>;
+  UserAuth?: Maybe<UserInfo>;
 };
 
 
@@ -115,6 +115,15 @@ export type QueryOneStorageListingArgs = {
 
 export type QueryOneUserArgs = {
   where?: InputMaybe<OneUserInputType>;
+};
+
+
+export type QueryUserAuthArgs = {
+  authuser: Scalars['String'];
+  code: Scalars['String'];
+  hd?: InputMaybe<Scalars['String']>;
+  prompt: Scalars['String'];
+  scope: Scalars['String'];
 };
 
 export type StorageListing = {
@@ -187,6 +196,17 @@ export type ManyUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type ManyUserQuery = { __typename?: 'Query', ManyUser?: Array<{ __typename?: 'User', createdAt: string, email: string, id: string, imageId?: string | null, modifiedAt?: string | null, name: string, phone?: string | null, avatar?: { __typename?: 'Image', createdAt: string, deletedAt?: string | null, id: string, imageUrl: string, modifiedAt?: string | null, storageId: string, userId?: string | null, storageListing: { __typename?: 'StorageListing', address: string, createdAt: string, deletedAt?: string | null, description: string, id: string, latitude: number, longitude: number, modifiedAt?: string | null, ownerId: string, size: number, storageTypeId: string }, user?: { __typename?: 'User', createdAt: string, email: string, id: string, imageId?: string | null, modifiedAt?: string | null, name: string, phone?: string | null } | null } | null, packages: Array<{ __typename?: 'Package', createdAt: string, deletedAt?: string | null, id: string, modifiedAt?: string | null, storageSessionId: string, userId: string }>, storageSession: Array<{ __typename?: 'StorageSession', createdAt: string, deletedAt?: string | null, endDate: string, id: string, modifiedAt?: string | null, priceCents: number, startDate: string, storageListingId: string, user: string }>, storages: Array<{ __typename?: 'StorageListing', address: string, createdAt: string, deletedAt?: string | null, description: string, id: string, latitude: number, longitude: number, modifiedAt?: string | null, ownerId: string, size: number, storageTypeId: string, image: Array<{ __typename?: 'Image', createdAt: string, deletedAt?: string | null, id: string, imageUrl: string, modifiedAt?: string | null, storageId: string, userId?: string | null }>, owner: { __typename?: 'User', createdAt: string, email: string, id: string, imageId?: string | null, modifiedAt?: string | null, name: string, phone?: string | null }, storageSessions: Array<{ __typename?: 'StorageSession', createdAt: string, deletedAt?: string | null, endDate: string, id: string, modifiedAt?: string | null, priceCents: number, startDate: string, storageListingId: string, user: string }>, storageType: { __typename?: 'DM_StorageTypes', createdAt: string, deletedAt?: string | null, id: string, modifiedAt?: string | null, storageType: string } }> }> | null };
+
+export type UserAuthQueryVariables = Exact<{
+  authuser: Scalars['String'];
+  code: Scalars['String'];
+  hd?: InputMaybe<Scalars['String']>;
+  prompt: Scalars['String'];
+  scope: Scalars['String'];
+}>;
+
+
+export type UserAuthQuery = { __typename?: 'Query', UserAuth?: { __typename?: 'UserInfo', name: string, email: string, picture: string } | null };
 
 
 export const ManyUserDocument = gql`
@@ -334,3 +354,56 @@ export function useManyUserLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<M
 export type ManyUserQueryHookResult = ReturnType<typeof useManyUserQuery>;
 export type ManyUserLazyQueryHookResult = ReturnType<typeof useManyUserLazyQuery>;
 export type ManyUserQueryResult = Apollo.QueryResult<ManyUserQuery, ManyUserQueryVariables>;
+export const UserAuthDocument = gql`
+    query UserAuth($authuser: String!, $code: String!, $hd: String, $prompt: String!, $scope: String!) {
+  UserAuth(
+    authuser: $authuser
+    code: $code
+    hd: $hd
+    prompt: $prompt
+    scope: $scope
+  ) {
+    name
+    email
+    picture
+  }
+}
+    `;
+export type UserAuthComponentProps = Omit<ApolloReactComponents.QueryComponentOptions<UserAuthQuery, UserAuthQueryVariables>, 'query'> & ({ variables: UserAuthQueryVariables; skip?: boolean; } | { skip: boolean; });
+
+    export const UserAuthComponent = (props: UserAuthComponentProps) => (
+      <ApolloReactComponents.Query<UserAuthQuery, UserAuthQueryVariables> query={UserAuthDocument} {...props} />
+    );
+    
+
+/**
+ * __useUserAuthQuery__
+ *
+ * To run a query within a React component, call `useUserAuthQuery` and pass it any options that fit your needs.
+ * When your component renders, `useUserAuthQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useUserAuthQuery({
+ *   variables: {
+ *      authuser: // value for 'authuser'
+ *      code: // value for 'code'
+ *      hd: // value for 'hd'
+ *      prompt: // value for 'prompt'
+ *      scope: // value for 'scope'
+ *   },
+ * });
+ */
+export function useUserAuthQuery(baseOptions: Apollo.QueryHookOptions<UserAuthQuery, UserAuthQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<UserAuthQuery, UserAuthQueryVariables>(UserAuthDocument, options);
+      }
+export function useUserAuthLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<UserAuthQuery, UserAuthQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<UserAuthQuery, UserAuthQueryVariables>(UserAuthDocument, options);
+        }
+export type UserAuthQueryHookResult = ReturnType<typeof useUserAuthQuery>;
+export type UserAuthLazyQueryHookResult = ReturnType<typeof useUserAuthLazyQuery>;
+export type UserAuthQueryResult = Apollo.QueryResult<UserAuthQuery, UserAuthQueryVariables>;

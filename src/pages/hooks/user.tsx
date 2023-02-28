@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 
-export const ManyUser = gql`
+const ManyUser = gql`
   query ManyUser {
     ManyUser {
       avatar {
@@ -112,3 +112,27 @@ export const ManyUser = gql`
     }
   }
 `;
+
+const UserAuth = gql`
+  query UserAuth(
+    $authuser: String!
+    $code: String!
+    $hd: String
+    $prompt: String!
+    $scope: String!
+  ) {
+    UserAuth(
+      authuser: $authuser
+      code: $code
+      hd: $hd
+      prompt: $prompt
+      scope: $scope
+    ) {
+      name
+      email
+      picture
+    }
+  }
+`;
+
+export { ManyUser, UserAuth };
