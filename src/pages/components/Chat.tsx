@@ -1,14 +1,7 @@
 import client from "../../lib/apollo/client";
-import { WebSocketLink } from "@apollo/client/link/ws";
 import { gql, useSubscription } from "@apollo/client";
 import { Container, Chip, Grid, TextField, Button } from "@material-ui/core";
 
-const link = new WebSocketLink({
-  uri: "ws://localhost:3000/api/graphql",
-  options: {
-    reconnect: true,
-  },
-});
 
 const GET_MESSAGES = gql`
   subscription {
