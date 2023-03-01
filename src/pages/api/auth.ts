@@ -8,36 +8,28 @@ export default async function handler(
 ) {
   const { code, scope, authuser, hd, prompt } = req.query;
 
- const params = {
+  const params = {
     code: code as string,
     hd: hd as string,
   };
 
-    console.log("before go to query")
-    
+  console.log("before go to query");
 
-    const { data } = await client.query({
-      query: gql`
-      query UserAuth(
-        $code: String!
-      ) {
-        UserAuth(
-          code: $code
-        ) {
+  const { data } = await client.query({
+    query: gql`
+      query UserAuth($code: String!) {
+        UserAuth(code: $code) {
           name
           email
           picture
         }
       }
     `,
-      variables: {
-        code: params.code,
-        hd: params.hd,
-      },
-    });
+    variables: {
+      code: params.code,
+      hd: params.hd,
+    },
+  });
 
-
-    
-    res.redirect("/");
-
+  res.redirect("/");
 }
