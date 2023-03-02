@@ -14,6 +14,7 @@ import "./schema/user/user.query"
 import "./schema/user/user.mutation"
 import "./schema/storage/storage.model"
 import "./schema/storage/storage.query"
+import "./schema/storage/storage.mutation"
 
 // Build and export the schema
 export const schema = builder.toSchema({})
@@ -28,18 +29,18 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   res.setHeader("Access-Control-Allow-Credentials", "true");
   res.setHeader(
-      "Access-Control-Allow-Origin",
-      "https://studio.apollographql.com"
+    "Access-Control-Allow-Origin",
+    "https://studio.apollographql.com"
   );
   res.setHeader(
-      "Access-Control-Allow-Headers",
-      "Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Methods, Access-Control-Allow-Origin, Access-Control-Allow-Credentials, Access-Control-Allow-Headers"
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Methods, Access-Control-Allow-Origin, Access-Control-Allow-Credentials, Access-Control-Allow-Headers"
   );
   if (req.method === "OPTIONS") {
-      res.end();
-      return false;
+    res.end();
+    return false;
   }
-  
+
   await startServer;
   await apolloServer.createHandler({
     path: "/api/graphql",

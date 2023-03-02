@@ -7,7 +7,7 @@ builder.prismaObject('StorageListing', {
     storageSessions: t.relation('storageSessions'),
     latitude: t.exposeFloat('latitude'),
     longitude: t.exposeFloat('longitude'),
-    address: t.exposeString('address'),   
+    address: t.exposeString('address'),
     description: t.exposeString('description'),
     size: t.exposeInt('size'),
     storageType: t.relation('storageType'),
@@ -28,15 +28,16 @@ builder.prismaObject('StorageListing', {
       nullable: true,
       resolve: (StorageHost) => StorageHost.deletedAt?.toString()
     })
-  }) 
+  })
 })
 
 builder.prismaObject('StorageSession', {
   fields: (t) => ({
     id: t.exposeString('id'),
     storageListing: t.relation('storageListing'),
-    storageListingId: t.exposeString('storageListingId'),
-    user: t.exposeString('userId'),
+    storageListingId: t.exposeString('storageListingId', { nullable: true }),
+    user: t.relation('user'),
+    userId: t.exposeString('userId'),
     packages: t.relation('packages'),
     priceCents: t.exposeInt('priceCents'),
     startDate: t.field({
@@ -72,12 +73,12 @@ builder.prismaObject('DM_StorageTypes', {
     createdAt: t.field({
       type: 'String',
       resolve: (DM_StorageTypes) => DM_StorageTypes.createdAt.toString()
-      }),
+    }),
     modifiedAt: t.field({
       type: 'String',
       nullable: true,
       resolve: (DM_StorageTypes) => DM_StorageTypes.modifiedAt?.toString()
-      }),
+    }),
     deletedAt: t.field({
       type: 'String',
       nullable: true,

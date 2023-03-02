@@ -15,7 +15,7 @@ builder.queryFields((t) => ({
     type: ["User"],
     nullable: true,
     args: {},
-    resolve: async (query, root, args) => 
+    resolve: async (query, root, args) =>
       await prisma.user.findMany({
         ...query
       })
@@ -25,9 +25,9 @@ builder.queryFields((t) => ({
     type: "User",
     nullable: true,
     args: {
-      where: t.arg({type: OneUserWhere})
+      where: t.arg({ type: OneUserWhere })
     },
-    resolve: async (query, root, args) => 
+    resolve: async (query, root, args) =>
       await prisma.user.findFirstOrThrow({
         ...query,
         where: {
@@ -36,7 +36,7 @@ builder.queryFields((t) => ({
           email: args.where?.email ?? undefined,
           phone: args.where?.phone ?? undefined
         }
-    })
+      })
   })
 }))
 
