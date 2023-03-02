@@ -14,7 +14,7 @@ import "./schema/user/user.query"
 import "./schema/user/user.mutation"
 import "./schema/storage/storage.model"
 import "./schema/storage/storage.query"
-import "./schema/storage/storage.mutation"
+import "./schema/oauth/oauth.query"
 
 // Build and export the schema
 export const schema = builder.toSchema({})

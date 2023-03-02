@@ -4,12 +4,18 @@ import { Inter } from "@next/font/google";
 import styles from "@/styles/Home.module.css";
 import { HexColor } from "./modules/HexColor";
 import NaiveTag from "./components/modular/NaiveTag";
-import NavBar from "./components/NavBar";
 import Map from "./components/Map";
 import TextInput from "./components/modular/TextInput";
 import React from "react";
 
+import { useManyUserQuery } from "../gql/graphql";
+
 export default function Home() {
+
+  const {loading, error , data} = useManyUserQuery();
+
+  console.log(data?.ManyUser);
+
   return (
     <>
       <Head>
@@ -18,10 +24,8 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <NavBar />
       <main className={styles.main}>
         <span> Test here or below... </span>
-
         <NaiveTag
           backgroundColor={new HexColor("#d97706")}
           textColor={new HexColor("#22c55e")}
